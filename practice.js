@@ -37,7 +37,7 @@ expense_form.addEventListener("submit", (e) => {
 
     // serialise this obj and store to local storage (i.e., convert it into a string)
     let serialise_expense = JSON.stringify(expense_obj);
-
+    console.log(uniqueKey)
     localStorage.setItem(uniqueKey, serialise_expense);
     uniqueKey++;
     localStorage.setItem("keyis",uniqueKey)
@@ -59,8 +59,8 @@ function showExpenses(expense_obj) {
     let childHtml = `
 <li class="expense-list-item" id=${expense_obj.id.toString()}> Category: ${expense_obj.category}, Description: ${expense_obj.description} -----> Expense: ₹${expense_obj.expence} 
 
-<button onclick = deleteExpense('${JSON.stringify(expense_obj.id)}')>Delete</button>
-<button onclick=editExpense('${JSON.stringify(expense_obj.id)}')>Edit</button>
+<button onclick = deleteExpense('${JSON.stringify(parseInt(expense_obj.id))}')>Delete</button>
+<button onclick=editExpense('${JSON.stringify(parseInt(expense_obj.id))}')>Edit</button>
 
 </li>
 `;
@@ -69,7 +69,7 @@ function showExpenses(expense_obj) {
 
 // edit functionality
 function editExpense(key){
-
+    // var key=parseInt(ke)
     let expense_obj = JSON.parse( localStorage.getItem(key));
 
     document.getElementById("exp").value = expense_obj.expence;
@@ -82,6 +82,8 @@ function editExpense(key){
 
 // delete functionality
 function deleteExpense(key) {
+    // var key=parseInt(ke)
+    console.log(key)
     localStorage.removeItem(key);
 
     // remove from ui
